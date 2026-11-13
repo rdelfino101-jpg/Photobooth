@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  h1, h2, h3, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@keyframes cameraFlash {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-flash {
+  animation: cameraFlash 0.5s ease-out forwards;
+}
+
+@keyframes countdownPulse {
+  0% { transform: scale(0.6); opacity: 0; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-countdown {
+  animation: countdownPulse 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom smooth dark scrollbar for general vertical panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.8);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.9);
+}
+
+/* ----------------------------------------------------
+ * High-Visibility Horizontal Scrollbars (UX Navigation)
+ * ---------------------------------------------------- */
+.horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: auto;
+  scrollbar-color: #ff2d55 #2a2a2a;
+  padding-bottom: 8px;
+}
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+  display: block;
+}
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 10px;
+}
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #ff2d55;
+  border-radius: 10px;
+  cursor: grab;
+}
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #ff5e7e;
+}
+
+/* ----------------------------------------------------
+ * Responsive Layout & Mobile Mode (Landscape & Portrait)
+ * ---------------------------------------------------- */
+#rotate-device-screen {
+  display: none !important;
+}
+
+/* 1. Base / Tablet y Laptop (min-width: 900px y min-height: 521px):
+   Conserva 62% cámara / 38% panel derecho y .items-grid en 3 columnas */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-content: start;
+}
+
+/* 2. Celular en Horizontal (@media (max-height: 520px) and (orientation: landscape)):
+   Libera espacio en el panel derecho y flota el botón de captura sobre la cámara */
+@media (max-height: 520px) and (orientation: landscape) {
+  .app-main-layout {
+    flex-direction: row !important;
+  }
+  
+  .camera-viewport-section {
+    width: 62% !important;
+    height: 100% !important;
+  }
+
+  .kiosk-right-panel {
+    width: 38% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+
+  /* Oculta visualmente las filas de PLANTILLA DE EVENTO y CATEGORÍAS */
+  .event-template-row,
+  .props-categories-row {
+    display: none !important;
+  }
+
+  /* La cuadrícula .items-grid ocupa el 85% de la altura del panel derecho con scroll en 2 columnas */
+  .items-grid-container {
+    height: 85% !important;
+    max-height: 85% !important;
+    flex: 1 1 85% !important;
+    overflow-y: auto !important;
+    padding: 6px !important;
+  }
+
+  .items-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .items-grid > button {
+    min-height: 80px !important;
+    padding: 6px !important;
+  }
+
+  /* Mueve o flota el bloque del botón de captura sobre el borde inferior de la cámara izquierda:
+     position: absolute; bottom: 12px; left: 31%; transform: translateX(-50%); z-index: 50; */
+  .capture-controls-panel {
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 31% !important;
+    transform: translateX(-50%) !important;
+    z-index: 50 !important;
+    width: auto !important;
+    max-width: 58vw !important;
+    background: rgba(14, 14, 14, 0.92) !important;
+    backdrop-filter: blur(14px) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 9999px !important;
+    padding: 4px 10px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(255, 45, 85, 0.25) !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+  }
+
+  .capture-controls-panel .modes-selector-group {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 2px !important;
+    padding: 2px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 9999px !important;
+  }
+
+  .capture-controls-panel .modes-selector-group button {
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    border-radius: 9999px !important;
+    flex-direction: row !important;
+    gap: 3px !important;
+  }
+
+  .capture-controls-panel .shutter-btn-wrapper {
+    padding: 0 !important;
+  }
+
+  .capture-controls-panel .shutter-btn {
+    width: 52px !important;
+    height: 52px !important;
+    border-width: 3px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .capture-controls-panel .shutter-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .capture-controls-panel .session-footer-row {
+    margin-left: 4px !important;
+    padding: 0 !important;
+  }
+}
+
+/* 3. Celular en Vertical (@media (max-width: 768px) and (orientation: portrait)):
+   Apila cámara arriba (~50% de altura) y panel abajo (~50% de altura) */
+@media (max-width: 768px) and (orientation: portrait) {
+  .app-main-layout {
+    flex-direction: column !important;
+  }
+
+  .camera-viewport-section {
+    width: 100% !important;
+    height: 50dvh !important;
+    max-height: 50dvh !important;
+    min-height: 44dvh !important;
+    flex-shrink: 0 !important;
+  }
+
+  .kiosk-right-panel {
+    width: 100% !important;
+    height: 50dvh !important;
+    max-height: 50dvh !important;
+    flex: 1 1 50dvh !important;
+    border-left-width: 0 !important;
+    border-top-width: 1px !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .items-grid-container {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 8px !important;
+  }
+
+  .items-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .items-grid > button {
+    min-height: 88px !important;
+    padding: 6px !important;
+  }
+
+  .capture-controls-panel {
+    padding: 6px 10px !important;
+    background: rgba(10, 10, 10, 0.95) !important;
+  }
+
+  .capture-controls-panel .shutter-btn {
+    width: 62px !important;
+    height: 62px !important;
+  }
+
+  .capture-controls-panel .shutter-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* ----------------------------------------------------
+ * Ken Burns & Slideshow Animations (Cinematic Projector)
+ * ---------------------------------------------------- */
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsZoom 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes livePhotoGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 45, 85, 0.5), 0 0 40px rgba(245, 158, 11, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 45, 85, 0.9), 0 0 65px rgba(245, 158, 11, 0.7);
+    transform: scale(1.02);
+  }
+}
+
+.animate-new-photo-badge {
+  animation: livePhotoGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes slideProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+

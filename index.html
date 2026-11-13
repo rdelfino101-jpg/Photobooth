@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>SnapKiosk - Pro Photo Booth</title>
+    <meta name="description" content="Touchscreen-optimized photo booth kiosk with multi-camera WebRTC input, 60fps canvas filters, chroma key, AR props, photo strips, and dynamic QR upload to Supabase." />
+    <meta property="og:title" content="SnapKiosk - Pro Photo Booth" />
+    <meta property="og:description" content="Touchscreen-optimized photo booth kiosk with multi-camera WebRTC input, 60fps canvas filters, chroma key, AR props, photo strips, and dynamic QR upload to Supabase." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Lobster&family=Montserrat:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <!-- CDN scripts for supabase, qrcode & mediapipe face mesh -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@qrcode/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 overflow-hidden select-none touch-none antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

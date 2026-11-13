@@ -1,0 +1,6 @@
+{
+  "name": "SnapKiosk - Pro Photo Booth",
+  "description": "Touchscreen-optimized photo booth kiosk with multi-camera WebRTC input, 60fps canvas filters, chroma key, AR props, photo strips, and dynamic QR upload to Supabase.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
